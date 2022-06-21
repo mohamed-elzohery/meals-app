@@ -4,6 +4,7 @@ import { MEALS } from '../data/dummy-data';
 import MealInfo from '../components/MealInfo';
 import Subtitle from '../components/MealDetail/Subtitle';
 import List from '../components/MealDetail/List';
+import IconButton from '../components/IconButton';
 
 const MealDetails = ({route, navigation}) => {
     const {mealId} = route.params;
@@ -11,10 +12,13 @@ const MealDetails = ({route, navigation}) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({title: meal.title});
-    } , [mealId]);
+    } , [mealId, navigation]);
+
+    const onPressHandler = () => console.log("Pressed");
 
 
     return <ScrollView style={styles.root}>
+        <IconButton icon="star" color="#FFF" btnStyle={{position: 'absolute', top: 10, right: 10, zIndex: 100}} onPressHandler={onPressHandler}/>
         <Image source={{uri: meal.imageUrl}} style={styles.img} />
         <Text style={styles.title}>{meal.title}</Text>
         <MealInfo 
