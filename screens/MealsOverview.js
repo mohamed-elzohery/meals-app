@@ -1,10 +1,18 @@
 import {View, Text, FlatList } from 'react-native';
-import { MEALS } from '../data/dummy-data';
+import { useLayoutEffect } from 'react';
+import { MEALS, CATEGORIES } from '../data/dummy-data';
 import MealItem from '../components/MealItem';
 
-const MealsOverview = ({route}) => {
+const MealsOverview = ({route, navigation}) => {
     const {ctgrId} = route.params;
     const meals = MEALS.filter(meal => meal.categoryIds.includes(ctgrId));
+
+    useLayoutEffect(() => {
+        const ctgrName = CATEGORIES.find(({id}) => id === ctgrId).title;
+
+        navigation.setOptions({title: ctgrName, headerTitleAlign: 'center'});
+    }, [ctgrId, navigation]);
+
     return <View>
         <FlatList
         data={meals}
