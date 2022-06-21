@@ -10,7 +10,7 @@ const MealsOverview = ({route, navigation}) => {
     useLayoutEffect(() => {
         const ctgrName = CATEGORIES.find(({id}) => id === ctgrId).title;
 
-        navigation.setOptions({title: ctgrName, headerTitleAlign: 'center'});
+        navigation.setOptions({title: ctgrName});
     }, [ctgrId, navigation]);
 
     return <View>
