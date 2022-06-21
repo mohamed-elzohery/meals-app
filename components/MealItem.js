@@ -1,15 +1,8 @@
 import {View, Pressable, Text, StyleSheet, Platform} from 'react-native';
 
-const CategoryItem = ({id, title, color, onPress}) => {
-    return <View style={styles.outerContainer}>
-        <Pressable 
-        style={({pressed}) => [styles.innerContainer, {backgroundColor: color}, pressed && styles.btnPressed]} 
-        android_ripple={{color: '#ccc'}}
-        onPress={onPress.bind(this, id)}>
-            <View style={styles.ctgrItem} >
-                <Text style={styles.title}>{title}</Text>
-            </View>
-        </Pressable>
+const MealItem = ({title}) => {
+    return <View>
+        <Text>{title}</Text>
     </View>
 }
 
@@ -41,4 +34,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CategoryItem;
+export default MealItem;
