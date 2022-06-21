@@ -1,24 +1,33 @@
 import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useContext } from 'react';
 import { MEALS } from '../data/dummy-data'; 
 import MealInfo from '../components/MealInfo';
 import Subtitle from '../components/MealDetail/Subtitle';
 import List from '../components/MealDetail/List';
 import IconButton from '../components/IconButton';
+import { favContext } from '../store/context/favorites-context';
 
 const MealDetails = ({route, navigation}) => {
     const {mealId} = route.params;
     const meal = MEALS.find(({id}) => id === mealId);
+    const {addToFavs, removeFromFavs, favMealsIds} = useContext(favContext);
+    const isMealLiked = favMealsIds.includes(mealId);
 
     useLayoutEffect(() => {
         navigation.setOptions({title: meal.title});
     } , [mealId, navigation]);
 
-    const onPressHandler = () => console.log("Pressed");
+    const onPressHandler = () => {
+        isMealLiked ? removeFromFavs(mealId) : addToFavs(mealId) ;
+    };
 
 
     return <ScrollView style={styles.root}>
-        <IconButton icon="star" color="#FFF" btnStyle={{position: 'absolute', top: 10, right: 10, zIndex: 100}} onPressHandler={onPressHandler}/>
+        <IconButton 
+        icon="star" 
+        color= {isMealLiked ? "#dbb52f" : "#FFF" }
+        btnStyle={{position: 'absolute', top: 10, right: 10, zIndex: 100}} 
+        onPressHandler={onPressHandler}/>
         <Image source={{uri: meal.imageUrl}} style={styles.img} />
         <Text style={styles.title}>{meal.title}</Text>
         <MealInfo 

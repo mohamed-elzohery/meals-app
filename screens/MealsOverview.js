@@ -1,7 +1,7 @@
-import {View, Text, FlatList } from 'react-native';
+import {View} from 'react-native';
 import { useLayoutEffect } from 'react';
 import { MEALS, CATEGORIES } from '../data/dummy-data';
-import MealItem from '../components/MealItem';
+import MealList from '../components/Meal/MealList';
 
 const MealsOverview = ({route, navigation}) => {
     const {ctgrId} = route.params;
@@ -14,17 +14,7 @@ const MealsOverview = ({route, navigation}) => {
     }, [ctgrId, navigation]);
 
     return <View>
-        <FlatList
-        data={meals}
-        renderItem={({item: {id, title, affordability, complexity, imageUrl, duration}}) => (<MealItem 
-            id={id}
-            title={title} 
-            affordability={affordability} 
-            complexity={complexity} 
-            imageUrl={imageUrl}
-            duration={duration}
-        />)}
-         />
+        <MealList meals={meals} />
     </View>
 }
 
