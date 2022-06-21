@@ -6,8 +6,10 @@ const CategoryScreen = () => {
     return <View>
         <FlatList
         data={CATEGORIES}
-        renderItem={({item: {id, title, color}}) => <CategoryItem title={title}/>} 
-        keyExtractor={({id}) => id}/>
+        renderItem={({item: {id, title, color}}) => <CategoryItem title={title} color={color}/>} 
+        keyExtractor={({id}) => id}
+        numColumns={2}
+        />
     </View>
 }
 
